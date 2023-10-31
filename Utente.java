@@ -2,7 +2,6 @@
 /**
  * Utente
  */
-
 public class Utente {
 
     private static Integer codiceClientePrograssivo=1;

@@ -8,6 +8,7 @@ class Terminale {
     String nome, cognome, email, username, password, passwordRep;
 
     List<Utente> utenti = new ArrayList<>();
+    List<Prodotto> prodotti = new ArrayList<>();
 
     private static Terminale instance = null;
     private final static String name = "Terminale 1";
@@ -80,14 +81,14 @@ class Terminale {
                 }
             }while(passwordRep.isEmpty());
 
-            if(!(password.equals(passwordRep))){
+            if(!(password.equalsIgnoreCase(passwordRep))){
                 System.out.println("Le due password devono coincidere");
             }
 
-        } while (!(password.equals(passwordRep)));
+        } while (!(password.equalsIgnoreCase(passwordRep)));
 
         for (Utente utente : utenti) {
-            if(utente.getEmail().equals(email) || utente.getUsername().equals(username)){
+            if(utente.getEmail().equalsIgnoreCase(email) || utente.getUsername().equalsIgnoreCase(username)){
                 found=true;
                 break;
             }
@@ -127,7 +128,7 @@ class Terminale {
         }while(password.isEmpty());
 
         for (Utente utente : utenti) {
-            if(utente.getPassword().equals(password) && utente.getUsername().equals(username)){
+            if(utente.getPassword().equalsIgnoreCase(password) && utente.getUsername().equalsIgnoreCase(username)){
                 return utente;
             }
         }
@@ -141,15 +142,131 @@ class Terminale {
     public void presentaMenu(){
         System.out.println("=================== MENU ===================");
         System.out.println("\t0) Esci");
-        System.out.println("\t1) Visualizza dettagli di un prodotto");
-        System.out.println("\t2) Visualizza quanti prodotti sono disponibili");
+        System.out.println("\t1) Visualizza i prodotti");
     }
 
     public void presentaMenuAdmin(){
-        System.out.println("\t3) Aggiungi un prodotto");
-        System.out.println("\t4) Rimuovi un prodotto");
+        System.out.println("\t2) Aggiungi un prodotto");
+        System.out.println("\t3) Rimuovi un prodotto");
+    }
+
+    public boolean addProduct(){
+
+        String nomeP, descrizioneP;
+        double prezzoP=0.0;
+        int quantitàP;
+        boolean found;
+
+        do {
+        
+        found=false;
+
+        System.out.println("Inserire nome prodotto: ");
+        do {
+            nomeP = scan.nextLine();
+            if (nomeP.isEmpty()) {
+                System.out.println("Inserisci un nome valido");
+            }
+        }while(nomeP.isEmpty());
+        
+        System.out.println("Inserire prezzo: ");
+        do {
+
+            try {
+                prezzoP = scan.nextDouble();
+            } catch (Exception e) {
+                System.out.println("Input non valido. Assicurati di inserire un numero decimale valido. INT,DEC");
+                break;
+            }
+            
+            if (prezzoP<=0) {
+                System.out.println("Inserisci un prezzo valido");
+            }
+        }while(prezzoP<=0);
+
+        System.out.println("Inserire quantità: ");
+        do {
+            quantitàP = scan.nextInt();
+            if (quantitàP<1) {
+                System.out.println("Inserisci una quantità valida");
+            }
+        }while(quantitàP<1);
+
+        System.out.println("Inserire descrizione: ");
+        do {
+            descrizioneP = scan.nextLine();
+            if (descrizioneP.isEmpty()) {
+                System.out.println("Inserisci una descrizione valida");
+            }
+        }while(descrizioneP.isEmpty());
+
+        for (Prodotto prodotto : prodotti) {
+            if(prodotto.getNomeProdotto().equalsIgnoreCase(nomeP)){
+                found=true;
+                break;
+            }
+        }
+
+        if(found){
+            System.out.println("Esiste già un utente registrato con questa mail o con questo username. ");
+            return false;
+        }
+
+        }while(found);
+
+        prodotti.add(new Prodotto(nomeP,prezzoP,quantitàP,descrizioneP));
+
+        return true;
     }
 
 
+    public boolean removeProduct(){
+
+        String nomeP;
+        boolean found;
+        Prodotto toRemove=null;
+
+        found=false;
+
+        System.out.println("Inserire nome o codice prodotto: ");
+        do {
+            nomeP = scan.nextLine();
+            if (nomeP.isEmpty()) {
+                System.out.println("Inserisci valori validi");
+            }
+        }while(nomeP.isEmpty());
+        
+        
+        for (Prodotto prodotto : prodotti) {
+            if(prodotto.getNomeProdotto().equalsIgnoreCase(nomeP) || prodotto.getCodiceProdotto().equalsIgnoreCase(nomeP)){
+                found=true;
+                toRemove=prodotto;
+                break;
+            }
+        }
+
+
+        if(!found){
+            System.out.println("Non esiste alcun prodotto con quel nome o codice ");
+            return false;
+        }
+
+        prodotti.remove(toRemove);
+
+        return true;
+    }
+
+    public void showDetails(){
+
+        if (prodotti.size()!=0) {
+            for (Prodotto prodotto : prodotti) {
+                System.out.println("\n____________________________________" + prodotto);
+            }
+        }
+        else{
+            System.out.println("No products yet");
+        }
+        
+    }
 }
 

@@ -1,7 +1,8 @@
 Milestone 1 - Inizializzazione del Progetto e Accesso Utente
 
-    Iniziate creando un repository su GitHub per il vostro progetto.
-    Crea un nuovo progetto Java in Visual Studio Code
+    #Iniziate creando un repository su GitHub per il vostro progetto.
+
+    #Crea un nuovo progetto Java in Visual Studio Code
     Suggerimento: Crea una classe principale chiamata CatalogoProdotti che fungerà da punto di ingresso dell'applicazione.
     Crea una struttura dati (ad esempio, un ArrayList) per memorizzare i prodotti.
     Implementate un menu di accesso con le seguenti opzioni: Accedi come Utente, Esci.
@@ -13,7 +14,8 @@ Milestone 2 - Implementazione dell'Accesso Amministratore e Gestione dei Prodott
 Implementate la funzionalità di accesso come "Amministratore".
 
     Dopo l'accesso come amministratore, visualizzate un menu con tutte le opzioni, comprese quelle per la gestione dei prodotti.
-    Consentite la creazione di nuovi prodotti, includendo i seguenti dettagli per ciascun prodotto: Nome del prodotto (una stringa che rappresenta il nome del prodotto), Prezzo del prodotto (un valore numerico che rappresenta il prezzo del prodotto) Quantità disponibile (un valore numerico che rappresenta la quantità di prodotti disponibili)
+    Consentite la creazione di nuovi prodotti, includendo i seguenti dettagli per ciascun prodotto: 
+    Nome del prodotto (una stringa che rappresenta il nome del prodotto), Prezzo del prodotto (un valore numerico che rappresenta il prezzo del prodotto) Quantità disponibile (un valore numerico che rappresenta la quantità di prodotti disponibili)
     Implementate la funzionalità per l'aggiunta di nuovi prodotti con questi dettagli.
     Consentite la rimozione di prodotti esistenti, consentendo all'utente di specificare un criterio (ad esempio, nome del prodotto).
     Aggiornate il catalogo dopo la rimozione del prodotto.

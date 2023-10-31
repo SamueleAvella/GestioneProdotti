@@ -57,18 +57,18 @@ class Main{
                 terminale1.presentaMenuAdmin();
                 do{
                     inputInt = scan.nextInt();
-                    if (inputInt<0 || inputInt>4) {
+                    if (inputInt<0 || inputInt>3) {
                         System.out.println("Inserisci un input valido. ");
                     }
-                }while(inputInt<0 || inputInt>4);
+                }while(inputInt<0 || inputInt>3);
             }
             else{
                 do{
                     inputInt = scan.nextInt();
-                    if (inputInt<0 || inputInt>2) {
+                    if (inputInt<0 || inputInt>1) {
                         System.out.println("Inserisci un input valido. ");
                     }
-                }while(inputInt<0 || inputInt>2);
+                }while(inputInt<0 || inputInt>1);
             }
 
             switch (inputInt) {
@@ -78,20 +78,23 @@ class Main{
                     loggedUser=null;
                     break;
                 case 1:
-                    System.out.println("Caso 1");
-                    //terminale1.showDetails();
+                    terminale1.showDetails();
                     break;
                 case 2:
-                    System.out.println("Caso 2");
-                    //terminale1.showNumberProducts();
+                    if (terminale1.addProduct()) {
+                        System.out.println("Prodotto aggiunto");
+                    }
+                    else{
+                        System.out.println("Prodotto non aggiunto");
+                    }
                     break;
                 case 3:
-                    System.out.println("Caso 3");
-                    //terminale1.addProduct();
-                    break;
-                case 4:
-                    System.out.println("Caso 4");
-                    //terminale1.removeProduct();
+                    if (terminale1.removeProduct()) {
+                        System.out.println("Prodotto rimosso");
+                    }
+                    else{
+                        System.out.println("Prodotto non rimosso");
+                    }
                     break;
             
                 default:
