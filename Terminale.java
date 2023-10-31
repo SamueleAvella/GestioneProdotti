@@ -35,7 +35,7 @@ class Terminale {
 
         System.out.println("Inserire nome: ");
         do {
-            nome = scan.nextLine();
+            nome = scan.next();
             if (nome.isEmpty()) {
                 System.out.println("Inserisci un nome valido");
             }
@@ -43,7 +43,7 @@ class Terminale {
         
         System.out.println("Inserire cognome: ");
         do {
-            cognome = scan.nextLine();
+            cognome = scan.next();
             if (cognome.isEmpty()) {
                 System.out.println("Inserisci un cognome valido");
             }
@@ -51,14 +51,14 @@ class Terminale {
 
         System.out.println("Inserire email: ");
         do {
-            email = scan.nextLine();
+            email = scan.next();
             if (email.isEmpty()) {
                 System.out.println("Inserisci un email valido");
             }
         }while(email.isEmpty());
         System.out.println("Inserire username: ");
         do {
-            username = scan.nextLine();
+            username = scan.next();
             if (username.isEmpty()) {
                 System.out.println("Inserisci un username valido");
             }
@@ -67,7 +67,7 @@ class Terminale {
         do {
             System.out.println("Inserire password: ");
             do {
-                password = scan.nextLine();
+                password = scan.next();
                 if (password.isEmpty()) {
                     System.out.println("Inserisci un password valido");
                 }
@@ -75,7 +75,7 @@ class Terminale {
 
             System.out.println("Ripeti password: ");
             do {
-                passwordRep = scan.nextLine();
+                passwordRep = scan.next();
                 if (passwordRep.isEmpty()) {
                     System.out.println("Inserisci un passwordRep valido");
                 }
@@ -112,7 +112,7 @@ class Terminale {
 
         System.out.println("Inserire username: ");
         do {
-            username = scan.nextLine();
+            username = scan.next();
             if (username.isEmpty()) {
                 System.out.println("Inserisci un username valido");
             }
@@ -121,7 +121,7 @@ class Terminale {
         
         System.out.println("Inserire password: ");
         do {
-            password = scan.nextLine();
+            password = scan.next();
             if (password.isEmpty()) {
                 System.out.println("Inserisci una password valida");
             }
@@ -143,11 +143,13 @@ class Terminale {
         System.out.println("=================== MENU ===================");
         System.out.println("\t0) Esci");
         System.out.println("\t1) Visualizza i prodotti");
+        System.out.println("\t2) Cerca prodotto");
     }
 
     public void presentaMenuAdmin(){
-        System.out.println("\t2) Aggiungi un prodotto");
-        System.out.println("\t3) Rimuovi un prodotto");
+        System.out.println("\t3) Aggiungi un prodotto");
+        System.out.println("\t4) Rimuovi un prodotto");
+        System.out.println("\t5) Modifica un prodotto");
     }
 
     public boolean addProduct(){
@@ -163,7 +165,7 @@ class Terminale {
 
         System.out.println("Inserire nome prodotto: ");
         do {
-            nomeP = scan.nextLine();
+            nomeP = scan.next();
             if (nomeP.isEmpty()) {
                 System.out.println("Inserisci un nome valido");
             }
@@ -194,7 +196,7 @@ class Terminale {
 
         System.out.println("Inserire descrizione: ");
         do {
-            descrizioneP = scan.nextLine();
+            descrizioneP = scan.next();
             if (descrizioneP.isEmpty()) {
                 System.out.println("Inserisci una descrizione valida");
             }
@@ -230,7 +232,7 @@ class Terminale {
 
         System.out.println("Inserire nome o codice prodotto: ");
         do {
-            nomeP = scan.nextLine();
+            nomeP = scan.next();
             if (nomeP.isEmpty()) {
                 System.out.println("Inserisci valori validi");
             }
@@ -260,13 +262,160 @@ class Terminale {
 
         if (prodotti.size()!=0) {
             for (Prodotto prodotto : prodotti) {
-                System.out.println("\n____________________________________" + prodotto);
+                System.out.println("\n____________________________________\n" + prodotto);
             }
         }
         else{
             System.out.println("No products yet");
         }
         
+    }
+
+    public boolean findProduct(){
+        String nomeP;
+        boolean found;
+        Prodotto toRemove=null;
+
+        found=false;
+
+        System.out.println("Inserire nome o codice prodotto: ");
+        do {
+            nomeP = scan.next();
+            if (nomeP.isEmpty()) {
+                System.out.println("Inserisci valori validi");
+            }
+        }while(nomeP.isEmpty());
+        
+        
+        for (Prodotto prodotto : prodotti) {
+            if(prodotto.getNomeProdotto().equalsIgnoreCase(nomeP) || prodotto.getCodiceProdotto().equalsIgnoreCase(nomeP)){
+                found=true;
+                System.out.println(prodotto);
+                break;
+            }
+        }
+
+
+        if(!found){
+            System.out.println("Non esiste alcun prodotto con quel nome o codice ");
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean modifyProduct(){
+
+        String nomeP, inputString;
+        boolean found, end=false;
+        Prodotto toModify=null;
+        int inputInt, index;
+        double inputDouble;
+
+        found=false;
+
+        System.out.println("Inserire nome o codice prodotto: ");
+        do {
+            nomeP = scan.next();
+            if (nomeP.isEmpty()) {
+                System.out.println("Inserisci valori validi");
+            }
+        }while(nomeP.isEmpty());
+        
+        
+        for (Prodotto prodotto : prodotti) {
+            if(prodotto.getNomeProdotto().equalsIgnoreCase(nomeP) || prodotto.getCodiceProdotto().equalsIgnoreCase(nomeP)){
+                found=true;
+                toModify=prodotto;
+                break;
+            }
+        }
+
+
+        if(!found){
+            System.out.println("Non esiste alcun prodotto con quel nome o codice ");
+            return false;
+        }
+
+        do{
+            inputString = null;
+            inputInt=0;
+            inputDouble=0;
+            do{
+                System.out.println("Inserire in numero associato per modificare: ");
+                System.out.println("1) Nome");
+                System.out.println("2) Quantità");
+                System.out.println("3) Prezzo");
+                System.out.println("4) Descrizione");
+
+                inputInt = scan.nextInt();
+
+                if (inputInt<1 || inputInt>4) {
+                    System.out.println("Inserisci un input corretto. ");
+                }
+            }while(inputInt<1 || inputInt>4);
+
+            switch (inputInt) {
+                case 1:
+                    do {
+                        System.out.println("Inserisci nuovo nome: ");
+                        inputString = scan.next();
+                        if((inputString.equals("")) || (inputString.equals(toModify.getNomeProdotto()))){
+                            System.out.println("Il nuovo nome non può essere nè vuoto, nè uguale al precedente");
+                        }
+                    }while((inputString.isEmpty()) || (inputString.equals(toModify.getNomeProdotto())));
+                    index = prodotti.indexOf(toModify);
+                    toModify.setNomeProdotto(inputString);
+                    prodotti.set(index, toModify);
+                    break;
+                case 2:
+                    do {
+                        System.out.println("Inserisci nuova quantità: ");
+                        inputInt = scan.nextInt();
+                        if((inputInt<0) || (inputInt == toModify.getQuantità())){
+                            System.out.println("La nuova quantità non può essere nè 0, nè uguale alla precedente");
+                        }
+                    }while((inputInt<0) || (inputInt == toModify.getQuantità()));
+                    index = prodotti.indexOf(toModify);
+                    toModify.setQuantità(inputInt);
+                    prodotti.set(index, toModify);
+                    break;
+                case 3:
+                    do {
+                        System.out.println("Inserisci nuovo prezzo: ");
+                        inputDouble = scan.nextInt();
+                        if((inputDouble<0) || (inputDouble == toModify.getPrezzo())){
+                            System.out.println("Il nuovo prezzo non può essere nè 0, nè uguale al precedente");
+                        }
+                    }while((inputDouble<0) || (inputDouble == toModify.getPrezzo()));
+                    index = prodotti.indexOf(toModify);
+                    toModify.setPrezzo(inputDouble);
+                    prodotti.set(index, toModify);
+                    break;
+                case 4:
+                    do {
+                        System.out.println("Inserisci nuova descrizione: ");
+                        inputString = scan.next();
+                        if((inputString.isEmpty()) || (inputString.equals(toModify.getDescrizioneProdotto()))){
+                            System.out.println("La nuova descrizione non può essere nè vuota, nè uguale alla precedente");
+                        }
+                    }while((inputString.isEmpty()) || (inputString.equals(toModify.getDescrizioneProdotto())));
+                    index = prodotti.indexOf(toModify);
+                    toModify.setDescrizioneProdotto(inputString);
+                    prodotti.set(index, toModify);
+                    break;
+                default:
+                    break;
+            }
+
+            System.out.println("Continuare con altre modifiche? 0 per sì, sennò qualsiasi altro tasto");
+            inputString = scan.next();
+
+            end = (!(inputString.equals("0"))) ? true : false;
+            
+        }while(!end);
+
+        return true;
     }
 }
 

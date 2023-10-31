@@ -57,18 +57,18 @@ class Main{
                 terminale1.presentaMenuAdmin();
                 do{
                     inputInt = scan.nextInt();
-                    if (inputInt<0 || inputInt>3) {
+                    if (inputInt<0 || inputInt>5) {
                         System.out.println("Inserisci un input valido. ");
                     }
-                }while(inputInt<0 || inputInt>3);
+                }while(inputInt<0 || inputInt>5);
             }
             else{
                 do{
                     inputInt = scan.nextInt();
-                    if (inputInt<0 || inputInt>1) {
+                    if (inputInt<0 || inputInt>2) {
                         System.out.println("Inserisci un input valido. ");
                     }
-                }while(inputInt<0 || inputInt>1);
+                }while(inputInt<0 || inputInt>2);
             }
 
             switch (inputInt) {
@@ -81,6 +81,9 @@ class Main{
                     terminale1.showDetails();
                     break;
                 case 2:
+                    terminale1.findProduct();
+                    break;
+                case 3:
                     if (terminale1.addProduct()) {
                         System.out.println("Prodotto aggiunto");
                     }
@@ -88,7 +91,7 @@ class Main{
                         System.out.println("Prodotto non aggiunto");
                     }
                     break;
-                case 3:
+                case 4:
                     if (terminale1.removeProduct()) {
                         System.out.println("Prodotto rimosso");
                     }
@@ -96,7 +99,8 @@ class Main{
                         System.out.println("Prodotto non rimosso");
                     }
                     break;
-            
+                case 5:
+                    terminale1.modifyProduct();
                 default:
 
                     break;

@@ -48,11 +48,27 @@ class Prodotto {
 
         descrizione += "Nome prodotto: " + this.getNomeProdotto();
         descrizione += "\tCod. : " + this.getCodiceProdotto();
-        descrizione += "\nPrezzo €: " + this.getPrezzo();
+        descrizione += "\nPrezzo Euro: " + this.getPrezzo();
         descrizione += "\tQta. : " + this.getQuantità();
         descrizione += "\nDesc.: " + this.getDescrizioneProdotto();
 
         return descrizione;
+    }
+
+    public void setDescrizioneProdotto(String descrizioneProdotto) {
+        this.descrizioneProdotto = descrizioneProdotto;
+    }
+
+    public void setNomeProdotto(String nomeProdotto) {
+        this.nomeProdotto = nomeProdotto;
+    }
+
+    public void setPrezzo(double prezzo) {
+        this.prezzo = prezzo;
+    }
+
+    public void setQuantità(int quantità) {
+        this.quantità = quantità;
     }
 
 
